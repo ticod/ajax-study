@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 검색</title>
+</head>
+<body>
+
+<form name="f">
+    <label for="name">회원 이름:</label>
+    <input type="text" name="name" id="name">
+    <input type="button" value="검색" onclick="loadName(this.form)">
+</form>
+<div id="list"></div>
+
+<script src="ajax.js"></script>
+<script>
+    function loadName(f) {
+        const params = "name=" + f.name.value;
+        sendRequest("member.jsp", params, memberList, "POST");
+    }
+
+    function memberList() {
+        if (ajax.readyState === 4) {
+            if (ajax.status === 200) {
+                list.innerHTML = ajax.responseText;
+            } else {
+                alert("서버 오류: " + ajax.status);
+            }
+        }
+    }
+</script>
+</body>
+</html>

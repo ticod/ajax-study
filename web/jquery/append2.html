@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<img src="../imgs/Jellyfish.jpg" alt="">
+<img src="../imgs/Desert.jpg" alt="">
+<img src="../imgs/Hydrangeas.jpg" alt="">
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("img").css("width", 250);
+        setInterval(() => {
+            $("img").first().appendTo("body");
+        }, 1000);
+    });
+</script>
+</body>
+</html>

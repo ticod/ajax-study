@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>each문 예제</title>
+</head>
+<body>
+
+<div id="arr"></div>
+<div id="obj"></div>
+
+<!-- script -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function(){
+        // Array foreach
+        const arr = [
+            {
+                name: "구디",
+                link: "http://www.goodee.co.kr"
+            },
+            {
+                name: "다음",
+                link: "http://www.daum.net"
+            },
+            {
+                name: "네이버",
+                link: "http://www.naver.com"
+            },
+            {
+                name: "구글",
+                link: "http://www.google.com"
+            }
+        ]
+        let output = "";
+        $.each(arr, (i, item) => {
+            output += "<a href='" + item.link + "'>" +
+                "<h3>" + (i + 1) + "." + item.name + "</h3>" +
+                "</a>";
+        });
+        $("#arr").html(output);
+
+        // Object foreach
+        const obj = {
+            name: "홍길동",
+            loc: "율도국"
+        };
+        $.extend(obj, {part:"의적", gender:"남자"});
+        output = "";
+        $.each(obj, (key, value) => {
+            output += key + " : " + value + "<br>";
+        })
+        $("#obj").html(output);
+
+    });
+</script>
+</body>
+</html>

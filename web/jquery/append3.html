@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>0.</div>
+<div>1.</div>
+<div>2.</div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        const info = [
+            {
+                name: "홍길동",
+                address: "서울시 강서구"
+            },
+            {
+                name: "김삿갓",
+                address: "서울시 종로구"
+            },
+            {
+                name: "이몽룡",
+                address: "서울시 금천구"
+            }
+        ];
+        $("div").append((index) => {
+            const item = info[index];
+            const output = "<h1>" + item.name + "</h1>" +
+                "<h2>" + item.address + "</h2>";
+            return output;
+        });
+    });
+</script>
+</body>
+</html>

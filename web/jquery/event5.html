@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 5px;
+            padding: 5px;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("a").click(function(event) {
+            $(this).css("background-color", "blue");
+            // event.stopPropagation();    // 이벤트 전파 방지
+            // event.preventDefault();     // 기본 설정된 이벤트 취소
+            return false;               // 위 두 설정을 같이 한 효과를 가져옴
+        });
+        $("h1").click(function() {
+            $(this).css("background-color", "red");
+        });
+    });
+</script>
+
+<h1><a href="http://www.goodee.co.kr">구디 아카데미</a></h1>
+<h1>Header 1</h1>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xml, json 연습</title>
+</head>
+<body>
+
+<input type="button" value="XML 매물 검색" onclick="doXml()">
+<input type="button" value="Json 매물 검색" onclick="doJson()">
+<div id="result"></div>
+
+<script src="ajax2.js"></script>
+<script>
+    const result = document.getElementById("result");
+
+    // xml
+    function doXml() {
+        new ajax.xhr.Request("house.xml", null, xmlResult, "GET");
+    }
+
+    function xmlResult(a) {
+        if (a.readyState === 4) {
+            if (a.status === 200) {
+                xmlControl(a);
+            }
+        }
+    }
+
+    function xmlControl(xhr) {
+        const xmlDoc = xhr.responseXML;
+        const house = xmlDoc.getElementsByTagName("property");
+        let htmlData = "";
+
+        htmlData += "<h2>XML 주택 정보</h2>";
+        htmlData += "<table border='1'>" +
+            "<tr>" +
+            "<th>주소</th>" +
+            "<th>가격</th>" +
+            "<th>특징</th>" +
+            "</tr>";
+
+        for (let i = 0; i < house.length; i++) {
+            const address = house[i].getElementsByTagName("address")[0]
+                    .childNodes[0].nodeValue;
+            const price = house[i].getElementsByTagName("price")[0]
+                    .childNodes[0].nodeValue;
+            const comment = house[i].getElementsByTagName("comment")[0]
+                    .childNodes[0].nodeValue;
+            htmlData += "<tr>" +
+                "<td>" + address + "</td>" +
+                "<td>" + price + "</td>" +
+                "<td>" + comment + "</td>" +
+                "</tr>";
+        }
+        htmlData += "</table>";
+
+        result.innerHTML = htmlData;
+    }
+
+    // json
+    function doJson() {
+        new ajax.xhr.Request("house.json", null, jsonResult, "GET");
+    }
+
+    function jsonResult(xhr) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                jsonControl(xhr);
+            }
+        }
+    }
+
+    function jsonControl(xhr) {
+        const jsonDoc = JSON.parse(xhr.responseText);
+        const propertyLength = jsonDoc.properties.length;
+        let htmlData = "";
+
+        htmlData += "<h2>Json 주택 정보</h2>";
+        htmlData += "<table border='1'>" +
+            "<tr>" +
+            "<th>주소</th>" +
+            "<th>가격</th>" +
+            "<th>특징</th>" +
+            "</tr>";
+
+        for (let i = 0; i < propertyLength; i++) {
+            const address = jsonDoc.properties[i].address;
+            const price = jsonDoc.properties[i].price;
+            const comment = jsonDoc.properties[i].comment;
+            htmlData += "<tr>" +
+                `<td>${address}</td>` +
+                `<td>${price}</td>` +
+                `<td>${comment}</td>` +
+                "</tr>";
+        }
+        htmlData += "<tr>" +
+            "<td colspan='3' style='text-align: center'>" +
+            `총 매물 건수: ${propertyLength} 건` +
+            "</td>" +
+            "</tr>" +
+            "</table>";
+
+        result.innerHTML = htmlData;
+    }
+</script>
+</body>
+</html>

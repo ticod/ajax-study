@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>예제 3 - 선택자</title>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li>사과</li>
+        <li>복숭아</li>
+        <li>감</li>
+        <li>참외</li>
+    </ul>
+</div>
+<div>
+    <span>
+        <ul>
+            <li>사과</li>
+            <li>복숭아</li>
+            <li>감</li>
+            <li>참외</li>
+        </ul>
+    </span>
+</div>
+<ul>
+    <li>사과</li>
+    <li>복숭아</li>
+    <li>감</li>
+    <li>참외</li>
+</ul>
+<hr>
+
+<input type="text">
+
+<input type="button" value="button"> <br>
+
+<input type="radio"> 라디오 버튼 <br>
+<input type="checkbox"> 체크박스 버튼 <br>
+
+<!-- script -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function(){
+        // css 선택자와 동일하게 선택
+        $("ul").css("color", "red");
+        // $("div > ul").css("color", "green");
+        $("div ul").css("color", "green");
+        $("div span ul").css("color", "blue");
+
+        // value는 val()함수로 변경 및 리턴
+        $("input[type=text]").val("hello jquery");
+        alert($("input[type=text]").val());
+
+        // type이 te로 시작하는 속성 선택
+        $("input[type^=te]").css("color", "blue");
+
+        // type이 xt로 끝나는 속성 선택
+        $("input[type$=xt]").css("color", "yellow");
+
+        // input 중 button 태그의 value 변경
+        // $("input[type=button]").val("등록");
+        $("input:button").val("등록");
+
+        // 라디오/체크박스 버튼 선택
+        $("input:radio").attr("checked", "checked");
+        $("input:checkbox").attr("checked", "checked");
+    });
+</script>
+</body>
+</html>

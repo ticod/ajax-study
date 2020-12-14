@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>예제 2</title>
+</head>
+<body>
+
+<h3>jQuery를 이용하여, select에서 선택된 이름을 3초 후에 alert 창 띄우기</h3>
+<select name="" id="sel">
+    <option value="딸기">딸기</option>
+    <option value="사과">사과</option>
+    <option value="복숭아">복숭아</option>
+    <option value="포도">포도</option>
+    <option value="오렌지">오렌지</option>
+</select>
+
+<!-- script -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    //현재 페이지의 준비가 완료되면 콜백
+    $(function(){
+        $("#sel").on('change', setTimeout(() => {
+            alert($("#sel").val());
+        }, 3000))
+    });
+    // $(function(){
+    //     setTimeout(function(){
+    //         alert($("#sel").val())
+    //     }, 3000)
+    // });
+</script>
+</body>
+</html>

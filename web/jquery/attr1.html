@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<img src="../imgs/Jellyfish.jpg" onerror="this.src='../imgs/Desert.jpg'">
+<img src="../imgs/Desert.jpg">
+<img src="../imgs/Hydrangeas.jpg">
+<img src="../imgs/Chrysanthemum.jpg">
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        // $("img").attr("width", 200);
+
+        $("img").attr("width", function(i) {
+            return (i + 1) * 100;
+        });
+
+        $("img").attr({"width": function(i) {
+            return (i + 1) * 100;
+        }, "height": 200});
+
+        $("img").each(function(i) {
+            if ($(this).attr("src") === "../imgs/Desert.jpg") {
+                alert($(this).attr("width"));
+            }
+        })
+
+    });
+</script>
+</body>
+</html>

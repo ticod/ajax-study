@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xml 분석하기</title>
+</head>
+<body>
+
+<h1>서울의 구 정보</h1>
+<input type="button" value="서울 전체 구" onclick="loadXml('all', 'all')">
+<input type="button" value="서울 동쪽 구" onclick="loadXml('동', 'east')">
+<input type="button" value="서울 서쪽 구" onclick="loadXml('서', 'west')">
+<input type="button" value="서울 남쪽 구" onclick="loadXml('남', 'south')">
+<input type="button" value="서울 북쪽 구" onclick="loadXml('북', 'north')">
+<div id="result"></div>
+
+<script src="ajax.js"></script>
+<script>
+    const divTag = document.getElementById("result");
+    let requestType;
+    let requestTag;
+
+    function loadXml(rType, tag) {
+        requestType = rType;
+        requestTag = tag;
+        sendRequest("address.xml", null, parseXml, "GET");
+    }
+
+    function parseXml() {
+        if (ajax.readyState === 4) {
+            if (ajax.status === 200) {
+                if (requestType === "all") {
+                    listAllStates();
+                } else {
+                    listPartStates();
+                }
+            } else {
+                alert("서버 오류: " + ajax.status);
+            }
+        }
+    }
+
+    function listAllStates() {
+        const xmlDoc = ajax.responseXML;
+        const allStates = xmlDoc.getElementsByTagName("state");
+
+        divTag.innerHTML = "서울 전체 구";
+        for (let i = 0; i < allStates.length; i++) {
+            divTag.innerHTML += "<br>- " + allStates[i].childNodes[0].nodeValue;
+        }
+    }
+
+    function listPartStates() {
+        const xmlDoc = ajax.responseXML;
+        const allStates
+            = xmlDoc.getElementsByTagName(requestTag)[0].getElementsByTagName("state");
+
+        divTag.innerHTML = "서울 " + requestType + "쪽 구";
+        for (let i = 0; i < allStates.length; i++) {
+            divTag.innerHTML += "<br>- " + allStates[i].childNodes[0].nodeValue;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>우편번호 보기</title>
+</head>
+<body>
+
+<input type="button" value="우편번호" onclick="doJson()"> <br>
+<div id="result"></div>
+
+<script src="ajax.js"></script>
+<script>
+    function doJson() {
+        sendRequest("zipcode.json", null, jsonResult, "GET");
+    }
+
+    function jsonResult() {
+        if (ajax.readyState === 4) {
+            if (ajax.status === 200) {
+                resultView();
+            }
+        }
+    }
+
+    function resultView() {
+        const jsonData = JSON.parse(ajax.responseText);
+        let htmlData = "<br>" +
+            "<table border='1'>" +
+            "<tr>" +
+            "<th>우편 번호</th>" +
+            "<th>읍면동</th>" +
+            "<th>주소</th>" +
+            "</tr>";
+
+        for (let i = 0; i < jsonData.ZIP.length; i++) {
+            const code = jsonData.ZIP[i].zipcode;
+            const dong = jsonData.ZIP[i].dong;
+            const addr = jsonData.ZIP[i].addr;
+            htmlData += "<tr>" +
+                "<td>" + code + "</td>" +
+                "<td>" + dong + "</td>" +
+                "<td>" + addr + "</td>" +
+                "</tr>"
+        }
+
+        htmlData += "</table>"
+        result.innerHTML = htmlData;
+    }
+</script>
+</body>
+</html>

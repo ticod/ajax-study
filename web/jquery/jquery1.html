@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>예제 1</title>
+</head>
+<body>
+
+<h1>jQuery1<p>jQuery1</p></h1>
+<h1>jQuery1</h1><p>jQuery1</p>
+<h1 class="item">jQuery class=item</h1>
+<h1 id="selected">jQuery id=selected</h1>
+<div>jQuery2</div>
+
+<!-- script -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    // 현재 페이지의 준비가 완료되면 콜백
+    $(document).ready(function(){
+        $("*").css("color", "pink");
+        $("p").css("color", "blue");
+        $("h1").css("color", "red");
+        $(".item").css("color", "green");
+        $("#selected").css("color", "orange");
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 함수</title>
+    <style>
+        .first {
+            color: red;
+            background-color: yellow;
+        }
+        .second {
+            color: pink;
+        }
+        .third {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="first">Header-0</h1>
+<h1 class="second">Header-1</h1>
+<h1 class="third">Header-2</h1>
+
+<!-- -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    /*
+    css 속성 가져오기
+     */
+    $(function(){
+
+        // alert($("h1").css("color"));
+        // alert($("h1:eq(2)").css("color"));
+        // alert($(".second").css("color"));
+        const first = $(".first");
+        alert(first.css("background"));
+        alert(first.css("background-color"));
+
+    });
+</script>
+</body>
+</html>

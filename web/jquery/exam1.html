@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 5px;
+            padding: 5px;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Header 0</h1>
+<h1>Header 1</h1>
+<h1>Header 2</h1>
+
+<div><h1>DIV Header 0</h1><p>DIV P 0</p></div>
+<div><h1>DIV Header 1</h1><p>DIV P 1</p></div>
+<div><h1>DIV Header 2</h1><p>DIV P 2</p></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        // h1, div 클릭시 alert 띄우기
+        // 단, 한 번만 띄우기! (div 내 h1은 두 번 띄워짐)
+
+        // $("h1").click(function(event) {
+        //     event.stopPropagation();
+        //     alert($(this).text());
+        // });
+        // $("div").click(function(event) {
+        //     alert($(this).text());
+        // });
+
+        // body 태그 내의 h1태그만 선택
+        $("body > h1").click(function(event) {
+            alert($(this).text());
+        });
+        $("div").click(function(event) {
+            // div 태그 내의 p, h태그 선택
+            // const hTag = $(this).find("h1").text();
+            // const pTag = $(this).find("p").text();
+            const hTag = $("h1", this).text();
+            const pTag = $("p", this).text();
+            alert(hTag + "\n" + pTag);
+        });
+    });
+</script>
+</body>
+</html>

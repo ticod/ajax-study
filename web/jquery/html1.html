@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html, text 함수</title>
+</head>
+<body>
+
+<div></div>
+<div></div>
+<div></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        // 1 번째 div : <h1>Header-0</h1>
+        // 2 번째 div : <h1>Header-1</h1>
+        // 3 번째 div : <h1>Header-2</h1>
+
+        const divTags = $("div");
+
+        divTags.html(function(i) {
+            $(this).html("<h1>Header-" + i + "</h1>");
+        })
+
+        divTags.each(function(i, item) {
+            $(item).html("<h1>Header-" + i + "</h1>");
+        })
+        alert($("div:eq(0)").text()); // Header-0
+
+        /* html이 아닌 순수 문자열 */
+        divTags.text("<h1>Header-0</h1>");
+        alert($("div:eq(0)").text()); // <h1>Header-0</h1>
+    });
+</script>
+</body>
+</html>

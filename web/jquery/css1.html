@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 함수</title>
+</head>
+<body>
+
+<h1>Header-0:red</h1>
+<h1>Header-1:white</h1>
+<h1>Header-2:purple</h1>
+
+<!-- -->
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    /*
+    반복문으로 css style을 변경하는 여러 방법
+     */
+    $(function(){
+
+        const colors = ["red", "white", "purple"];
+        // $("h1").each(function(i, item) {
+        //     $(this).css("color", colors[i]);
+        // })
+        //
+        // $.each(colors, function(i, c) {
+        //     $("h1:eq(" + i + ")").css("color", c);
+        // });
+
+        // css 함수로 바꾸는 방법
+        // $("h1").css("color", function(index) {
+        //     return colors[index];
+        // }).css("background", "black");
+
+        $("h1").css({"color": function(index) {
+            return colors[index];
+            },
+            "background": "black"
+        });
+
+    });
+</script>
+</body>
+</html>
