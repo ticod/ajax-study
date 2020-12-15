@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        // 주석 처리 한 소스 모두 가능!
+        // $("input[type=submit]").click(function() {
+        // $("input:submit").click(function() {
+        $("#myform").submit(function(event) {
+            alert("이름: " + $("#name").val()
+                    + "\n비밀번호: " + $("#password").val());
+            // return false;
+            event.preventDefault();
+        });
+    });
+</script>
+
+<form id="myform">
+    이름: <input type="text" name="name" id="name"> <br>
+    비밀번호: <input type="password" name="password" id="password"> <br>
+    <input type="submit" value="제출">
+</form>
+</body>
+</html>
