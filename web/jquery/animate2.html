@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("#div1").click(function() {
+            let width = $(this).css("width");
+            let height = $(this).css("height");
+            $(this).animate({
+                width: "+=50",
+                height: "+=50"
+            }, 'slow');
+        });
+        $("#div2").click(function() {
+            $(this).animate({
+                left: "+=50"
+            }, 2000).animate({
+                width: "+=50"
+            }, 2000).animate({
+                height: "+=50"
+            }, 2000);
+        });
+        $("#div3").animate({left: "+=50"}, 2000);
+        $("#div3").animate({width: "+=50"}, 2000);
+        $("#div3").animate({height: "+=50"}, 2000);
+        setTimeout(function() {
+            $("#div3").clearQueue();
+            $("#div3").hide();
+        }, 6000);
+        setTimeout(function() {
+            $("#div3").show();
+        }, 7000);
+    });
+</script>
+</body>
+</html>

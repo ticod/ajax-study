@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .animation_canvas {
+            overflow: hidden;
+            position: relative;
+            width: 600px;
+            height: 400px;
+        }
+        .slider_panel {
+            width: 3000px;
+            position: relative;
+        }
+        .slider_image {
+            float: left;
+            width: 600px;
+            height: 400px;
+        }
+        .slider_text_panel {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+        }
+        .slider_text {
+            position: absolute;
+            width: 250px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding:1.5em;
+        }
+        .control_panel {
+            position: absolute;
+            top: 380px;
+            left: 270px;
+            height: 15px;
+            overflow: hidden;
+        }
+        .control_button {
+            width: 12px;
+            height: 46px;
+            position: relative;
+            float: left;
+            cursor: pointer;
+            background: url("../slideimg/point_button.png");
+        }
+        .control_button:hover {
+            top: -16px;
+        }
+        .select {
+            top: -31px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="animation_canvas">
+    <div class="slider_panel">
+        <img src="../slideimg/Desert.jpg" class="slider_image">
+        <img src="../slideimg/Hydrangeas.jpg" class="slider_image">
+        <img src="../slideimg/Jellyfish.jpg" class="slider_image">
+        <img src="../slideimg/Koala.jpg" class="slider_image">
+        <img src="../slideimg/Lighthouse.jpg" class="slider_image">
+    </div>
+    <div class="slider_text_panel">
+        <div class="slider_text"><h1>사막 이미지</h1><p>더운 사막</p></div>
+        <div class="slider_text"><h1>수국 이미지</h1><p>물에서 자라는 수생 식물</p></div>
+        <div class="slider_text"><h1>해파리 이미지</h1><p>해파리는 독이 있다</p></div>
+        <div class="slider_text"><h1>코알라 이미지</h1><p>코알라는 유칼리 나무잎만 먹는다</p></div>
+        <div class="slider_text"><h1>등대 이미지</h1><p>어두운 밤 길을 비추는 등대</p></div>
+    </div>
+    <div class="control_panel">
+        <div class="control_button"></div>
+        <div class="control_button"></div>
+        <div class="control_button"></div>
+        <div class="control_button"></div>
+        <div class="control_button"></div>
+    </div>
+</div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $(".control_button").each(function(index) {
+            $(this).attr("idx", index);
+        }).click(function() {
+            let index = $(this).attr("idx");
+            moveSlider(index);
+        });
+        $(".slider_text").css("left", -300).each(function(index) {
+            $(this).attr("idx", index);
+        });
+        moveSlider(0);
+        // let index = 0;
+        // let inc = 1;
+        // setInterval(function() {
+        //     if(index >= 4) inc = -1;
+        //     if(index <= 0) inc = 1;
+        //     index += inc;
+        //     moveSlider(index);
+        // }, 2000);
+
+        function moveSlider(index) {
+            let moveLeft = -(index * 600);
+            $(".slider_panel").animate({left:moveLeft}, 'slow');
+            $(".control_button[idx=" + index + "]").addClass("select");
+            $(".control_button[idx!=" + index + "]").removeClass("select");
+            $(".slider_text[idx=" + index + "]").show().animate({
+                left: 0
+            }, 'slow');
+            $(".slider_text[idx!=" + index + "]").hide('slow', function() {
+                $(this).css("left", -300);
+            });
+        }
+    });
+</script>
+</body>
+</html>
