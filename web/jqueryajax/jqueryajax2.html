@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax 로그인</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<form name="f">
+    <label for="id">아이디</label>
+    <input type="text" id="id">
+    <input type="button" value="중복 체크" id="btn"> <br>
+    <label for="password">비밀번호</label>
+    <input type="password" id="password"> <br>
+    <input type="submit" value="로그인" id="submit"> <br>
+</form>
+
+<div id="message"></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("#submit").submit(function(event) {
+            const test = [
+                $("#id").val(),
+                $("#password").val()
+            ];
+            const param = {id:$("#id").val() ,password:$("#password").val()}
+            $.ajax({
+                url: "ajax2-1.jsp",
+                type: "POST",
+                data: param,
+                success: function(data) {
+                    $("#message").html(data);
+                },
+                error: function(e) {
+                    alert("서버 오류: " + e.status);
+                }
+            })
+            return false;
+        })
+
+        $("#btn").click(function() {
+            $.ajax({
+                url: "ajax2-2.jsp",
+                type: "POST",
+                data: {id:$("#id").val()},
+                success: function(data) {
+                    $("#message").html(data);
+                    if ($("h1").is(".find")) {
+                        $("#id").val();
+                    }
+                },
+                error: function(e) {
+                    alert("서버 오류: " + e.status);
+                }
+            })
+        })
+    });
+</script>
+</body>
+</html>

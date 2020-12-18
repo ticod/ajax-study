@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button id="btn1">ajax1-1.jsp 호출</button>
+<button id="rmbtn1">ajax1-1.jsp 호출한 내용 삭제</button>
+<button id="btn2">ajax1-2.jsp 호출</button>
+<button id="rmbtn2">ajax1-2.jsp 호출한 내용 삭제</button>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("#btn1").click(function() {
+            $.ajax("ajax1-1.jsp", {
+                success: function(data) {
+                    $("body").append(data);
+                },
+                error: function(e) {
+                    alert("서버 오류:" + e.status);
+                }
+            })
+        })
+        $("#rmbtn1").click(function() {
+            // $("h1.last").remove();
+            // $("h1").get(-1).remove();
+            $("h1").eq(-1).remove();
+        })
+
+        // ajax로 파라미터 전달달
+       $("#btn2").click(function() {
+            const param = "name=홍길동&age=20";
+            $.ajax({
+                url: "ajax1-2.jsp",
+                type: "POST",
+                data: param,
+                success: function(data) {
+                    $("body").append(data);
+                },
+                error: function(e) {
+                    alert("서버 오류:" + e.status);
+                }
+            })
+        })
+
+        $("#rmbtn2").click(function() {
+            // $("h1.last").remove();
+            // $("h1").get(-1).remove();
+            $("h2").eq(-1).remove();
+        })
+    });
+</script>
+</body>
+</html>

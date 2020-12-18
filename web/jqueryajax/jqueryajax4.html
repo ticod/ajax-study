@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax xml</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<button id="btn">XML 연습</button>
+<div id="person"></div>
+<input type="button" value="서울 전체 구" id="allbtn">
+<input type="button" value="서울 동쪽 구" onclick="statePrint('east')">
+<input type="button" value="서울 서쪽 구" onclick="statePrint('west')">
+<input type="button" value="서울 남쪽 구" onclick="statePrint('south')">
+<input type="button" value="서울 북쪽 구" onclick="statePrint('north')">
+<div id="result"></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("#btn").click(function() {
+            $.ajax("ajax4.xml", {
+                success: function(data) {
+                    $(data).find("person").each(function() {
+                        let name = "<li>" + $(this).find("name").text() + "</li>";
+                        let gender = "<li>" + $(this).find("gender").text() + "</li>";
+                        let part = "<li>" + $(this).find("part").text() + "</li>";
+                        $("#person").append("<ul>" + name + gender + part + "</ul>");
+                    })
+                },
+                error: function(e) {
+                    alert("서버 오류:" + e.status);
+                }
+            })
+        })
+
+        $("#allbtn").click(function() {
+            $.ajax("address.xml", {
+                success: function(data) {
+                    let html = "";
+                    html += "<ul>";
+                    $(data).find("state").each(function() {
+                        html += "<li>" + $(this).text() + "</li>";
+                    })
+                    html += "</ul>";
+                    $("#result").html(html);
+                }, error: function(e) {
+                    alert("서버 오류: " + e.status);
+                }
+            })
+        })
+    });
+
+    function statePrint(direction) {
+        $.ajax("address.xml", {
+            success: function(data) {
+                let html = ""
+                html += "<ul>"
+                $(data).find(direction).find("state").each(function() {
+                    html += "<li>" + $(this).text() + "</li>";
+                })
+                html += "</ul>";
+                $("#result").html(html);
+            },
+            error: function(e) {
+                alert("서버 오류: " + e.status);
+            }
+        })
+    }
+</script>
+</body>
+</html>

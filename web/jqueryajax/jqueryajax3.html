@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax 자동완성</title>
+    <style>
+        .listbox {
+            position: relative;
+            left: 10px;
+            margin: 10px;
+            width: 200px;
+            background-color: #EEEEEE;
+            color: #FF00FF;
+            border: 2px solid #000;
+        }
+
+        .namelist {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hover {
+            background-color: cyan;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<span class="label">사용자 아이디</span>
+<input type="text" id="id" name="id">
+<div class="listbox">
+    <div class="namelist"></div>
+</div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $(".listbox").hide();
+        $("#id").keyup(function() {
+            var data = "id=" + $("#id").val();
+            $.ajax({
+                url: "ajax3.jsp",
+                type: "post",
+                data: data,
+                success: function(html) {
+                    $(".listbox").show();
+                    $(".namelist").html(html);
+                    $("li").hover(function() {
+                        $(this).addClass("hover");
+                    }, function() {
+                        $(this).removeClass("hover");
+                    })
+                    $("li").click(function() {
+                        $("#id").val($(this).text());
+                        $(".listbox").hide();
+                    })
+                }
+            })
+            if ($("#id").val() == "") {
+                $(".listbox").hide();
+            }
+        })
+    });
+</script>
+</body>
+</html>
