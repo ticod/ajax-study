@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" style="width: 75%">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script>
+    const MONTHS = [
+        "1월", "2월", "3월", "4월",
+        "5월", "6월", "7월", "8월",
+        "9월", "10월", "11월", "12월",
+    ];
+    const barChartData = {
+        labels: MONTHS, // x 좌표 text
+        datasets : [ // value들
+            {
+                label: "영업부실적",
+                backgroundColor: "#FF90FF",
+                borderColor: "#FF90FF",
+                borderWidth: 1,
+                data: [10, 15, 25, 55, -25, 65, 30, 55, 28, 43, 68]
+            },
+            {
+                label: "총무부실적",
+                backgroundColor: "#0000FF",
+                borderColor: "#0000FF",
+                borderWidth: 1,
+                data: [1, 5, 5, 15, -5, 25, 13, 11, 2, 4, 8]
+            },
+            {
+                label: "기획부실적",
+                backgroundColor: "#FF0000",
+                borderColor: "#FF0000",
+                borderWidth: 1,
+                data: [1, 5, 5, 15, -5, 25, 13, 11, 2, 4, 8]
+            }
+        ]
+    };
+    window.onload = function() {
+        const ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            type: "bar", // bar, line, pie, doughnut
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {position: "bottom"},
+                title: {
+                    display: true,
+                    text: "막대 그래프 연습"
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

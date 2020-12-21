@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<button id="jsonbtn">멤버</button>
+<div id="result"></div>
+<button id="housebtn">집 정보</button>
+<div id="houseResult"></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(function() {
+        $("#jsonbtn").click(function() {
+            $.ajax({
+                url: "person.jsp",
+                success: function(data) {
+                    const person = JSON.parse(data);
+                    $.each(person, function(index, item) {
+                        $("#result").append("<h3>" + item.name + ":" + item.gender + ":" + item.part + "</h3>");
+                    });
+                },
+                error: function(e) {
+                    alert(e.status);
+                }
+            })
+        })
+
+        $("#housebtn").click(function() {
+            $.ajax({
+                url: "house.jsp",
+                success: function(data) {
+                    const house = JSON.parse(data);
+                    $("#houseResult").append("<table>");
+                    $("#houseResult").append("<tr>");
+                    $("#houseResult").append("<td>주소</td><td>가격</td><td>정보</td>");
+                    $("#houseResult").append("</tr>");
+                    $.each(house.properties, function(index, item) {
+                        $("#houseResult").append("<tr>");
+                        $("#houseResult").append("<td>" + item.address + "</td>");
+                        $("#houseResult").append("<td>" + item.price + "</td>");
+                        $("#houseResult").append("<td>" + item.comment + "</td>");
+                        $("#houseResult").append("</tr>");
+                    })
+                    $("#houseResult").append("</table>");
+                }
+            })
+        })
+    })
+</script>
+
+</body>
+</html>
