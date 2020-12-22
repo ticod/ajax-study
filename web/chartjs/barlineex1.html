@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" style="width: 75%">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script>
+    const MONTHS = [
+        "1월", "2월", "3월", "4월",
+        "5월", "6월", "7월", "8월",
+        "9월", "10월", "11월", "12월",
+    ];
+    const chartData = {
+
+        labels: MONTHS, // x 좌표 text
+        datasets : [ // value들
+            {
+                type: 'line',
+                label: "영업부",
+                fill: false,
+                borderColor: "#FF00FF",
+                borderWidth: 1,
+                data: [10, 15, 25, 55, -25, 65, 30, 55, 28, 43, 68]
+            },
+            {
+                type: 'bar',
+                label: "영업부",
+                fill: false,
+                backgroundColor: "#A566FF",
+                borderColor: "white",
+                borderWidth: 1,
+                data: [10, 15, 25, 55, -25, 65, 30, 55, 28, 43, 68]
+            },
+            {
+                type: 'line',
+                label: "총무부",
+                fill: false,
+                borderColor: "#00FF00",
+                borderWidth: 1,
+                data: [1, 5, 5, 15, -5, 25, 13, 11, 2, 4, 8]
+            },
+            {
+                type: 'bar',
+                label: "총무부",
+                fill: false,
+                backgroundColor: "#86e57f",
+                borderWidth: 1,
+                data: [1, 5, 5, 15, -5, 25, 13, 11, 2, 4, 8]
+            }
+        ]
+    };
+    window.onload = function() {
+        const ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx, {
+            type: "line", // bar, line, pie, doughnut
+            data: chartData,
+            options: {
+                responsive: true,
+                legend: {display: "false"},
+                title: {
+                    display: true,
+                    text: "막대/선 그래프 연습"
+                },
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display:true,
+                            labelString: "부서 별 실적 증가율"
+                        }
+                    }]
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
